@@ -3,7 +3,7 @@
 local M = {}
 
 M.palette = {
-  -- Base shades
+  -- Base shades (unchanged — this is the actual "matte black" identity)
   bg0 = "#0D0D0D",
   bg1 = "#121212",
   bg2 = "#333333",
@@ -16,7 +16,6 @@ M.palette = {
   fg3 = "#8A8A8D",
   fg4 = "#333333",
 
-  -- Aliases for plugin integrations
   fg = "#EAEAEA",
   bg = "#121212",
 
@@ -25,23 +24,23 @@ M.palette = {
 
   comment = "#8A8A8D",
 
-  -- Accent palette (matches VS Code / Zed ports)
-  red = "#B91C1C",
-  crimson = "#DC2626",
-  orange = "#F59E0B",
-  amber = "#D97706",
-  yellow = "#FBBF24",
-  gold = "#EFBF04",
-  ochre = "#BF9903",
+  -- Accent palette — reassigned so each syntax role gets its own hue family
+  red = "#B91C1C",       -- errors only
+  crimson = "#DC2626",    -- diagnostics/diff only
+  orange = "#F59E0B",     -- signature accent: cursor, search, special punctuation
+  amber = "#D97706",      -- constants only now
+  yellow = "#FBBF24",     -- warnings only now
+  gold = "#EFBF04",       -- numbers/chars only now
+  ochre = "#BF9903",      -- free for your own use
 
-  green = "#059669",
-  teal = "#10B981",
-  blue = "#3B82F6",
-  purple = "#8D20B2",
-  cyan = "#1EA7A0",
+  green = "#10B981",      -- strings (moved off keyword duty)
+  teal = "#059669",       -- booleans (swapped w/ green so string ≠ keyword hue)
+  blue = "#5C8DC9",       -- muted — preproc/include (softened from vivid #3B82F6)
+  purple = "#8D20B2",     -- keywords/statements (freed up from unused)
+  cyan = "#1EA7A0",       -- types/structs (freed up from unused)
 
-  pink = "#F87171",
-  magenta = "#B027DE",
+  pink = "#F87171",       -- functions (freed up from unused)
+  magenta = "#B027DE",    -- special chars/regex (freed up from unused)
 
   gray = "#5C6370",
   gray1 = "#A3A3A3",
@@ -106,36 +105,36 @@ function M.apply()
   set("DiagnosticOk", { fg = p.teal })
   set("DiagnosticHint", { fg = p.blue })
   set("DiagnosticInfo", { fg = p.gold })
-  set("DiagnosticWarn", { fg = p.amber })
+  set("DiagnosticWarn", { fg = p.yellow })
   set("DiagnosticError", { fg = p.crimson })
 
   set("Comment", { fg = p.comment, italic = true })
   set("Constant", { fg = p.amber })
-  set("String", { fg = p.fg1 })
+  set("String", { fg = p.green })
   set("Character", { fg = p.gold })
   set("Number", { fg = p.gold })
   set("Float", { fg = p.gold })
   set("Boolean", { fg = p.teal })
-  set("Identifier", { fg = p.amber })
-  set("Function", { fg = p.crimson })
-  set("Statement", { fg = p.green })
-  set("Keyword", { fg = p.green })
-  set("Conditional", { fg = p.green })
-  set("Repeat", { fg = p.green })
+  set("Identifier", { fg = p.fg2 })          -- neutral: variables shouldn't compete for attention
+  set("Function", { fg = p.pink })
+  set("Statement", { fg = p.purple })
+  set("Keyword", { fg = p.purple })
+  set("Conditional", { fg = p.purple })
+  set("Repeat", { fg = p.purple })
+  set("Exception", { fg = p.purple })
   set("Operator", { fg = p.fg2 })
-  set("Exception", { fg = p.green })
-  set("PreProc", { fg = p.yellow })
+  set("PreProc", { fg = p.blue })
   set("Include", { fg = p.blue })
-  set("Define", { fg = p.yellow })
-  set("Macro", { fg = p.yellow })
-  set("PreCondit", { fg = p.yellow })
-  set("Type", { fg = p.yellow })
-  set("StorageClass", { fg = p.yellow })
-  set("Structure", { fg = p.yellow })
-  set("Typedef", { fg = p.yellow })
+  set("Define", { fg = p.blue })
+  set("Macro", { fg = p.blue })
+  set("PreCondit", { fg = p.blue })
+  set("Type", { fg = p.cyan })
+  set("StorageClass", { fg = p.cyan })
+  set("Structure", { fg = p.cyan })
+  set("Typedef", { fg = p.cyan })
   set("Special", { fg = p.orange })
-  set("SpecialChar", { fg = p.gold })
-  set("Tag", { fg = p.green })
+  set("SpecialChar", { fg = p.magenta })
+  set("Tag", { fg = p.crimson })
   set("Delimiter", { fg = p.fg3 })
   set("SpecialComment", { fg = p.comment, italic = true })
   set("Underlined", { fg = p.orange, underline = true })
@@ -143,19 +142,19 @@ function M.apply()
 
   vim.g.terminal_color_0 = p.bg2
   vim.g.terminal_color_1 = p.red
-  vim.g.terminal_color_2 = "#129B70"
+  vim.g.terminal_color_2 = p.green
   vim.g.terminal_color_3 = p.orange
-  vim.g.terminal_color_4 = "#325DCA"
+  vim.g.terminal_color_4 = p.blue
   vim.g.terminal_color_5 = p.purple
   vim.g.terminal_color_6 = p.cyan
   vim.g.terminal_color_7 = p.fg2
   vim.g.terminal_color_8 = p.fg3
-  vim.g.terminal_color_9 = "#E62222"
-  vim.g.terminal_color_10 = "#22C55E"
-  vim.g.terminal_color_11 = "#F1CB42"
-  vim.g.terminal_color_12 = "#3C71F6"
-  vim.g.terminal_color_13 = "#B027DE"
-  vim.g.terminal_color_14 = "#24D0C7"
+  vim.g.terminal_color_9 = p.crimson
+  vim.g.terminal_color_10 = p.teal
+  vim.g.terminal_color_11 = p.yellow
+  vim.g.terminal_color_12 = p.blue
+  vim.g.terminal_color_13 = p.magenta
+  vim.g.terminal_color_14 = p.cyan
   vim.g.terminal_color_15 = p.fg0
   vim.g.terminal_color_background = p.bg1
   vim.g.terminal_color_foreground = p.fg1
