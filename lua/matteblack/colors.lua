@@ -36,7 +36,7 @@ M.palette = {
   green = "#10B981",      -- strings (moved off keyword duty)
   teal = "#059669",       -- booleans (swapped w/ green so string ≠ keyword hue)
   blue = "#5C8DC9",       -- muted — preproc/include (softened from vivid #3B82F6)
-  purple = "#8D20B2",     -- keywords/statements (freed up from unused)
+  purple = "#a87bb8",     -- keywords/statements (freed up from unused)
   cyan = "#1EA7A0",       -- types/structs (freed up from unused)
 
   pink = "#F87171",       -- functions (freed up from unused)
